@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Presentazione Tesina</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .slide {
+            width: 297mm;
+            height: 210mm;
+            background: white;
+            page-break-after: always;
+            padding: 40px 60px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .slide:last-child {
+            page-break-after: auto;
+        }
+
+        /* Header */
+        .slide-header {
+            border-bottom: 3px solid;
+            border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%) 1;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .slide-title {
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .slide-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        /* Content */
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide-content h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .slide-content h3 {
+            font-size: 24px;
+            color: #667eea;
+            margin: 20px 0 10px 0;
+        }
+
+        .slide-content p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .slide-content ul {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #555;
+            margin-left: 30px;
+        }
+
+        .slide-content li {
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .slide-footer {
+            border-top: 2px solid #e0e0e0;
+            padding-top: 10px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #999;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Special Slides */
+        .cover-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cover-slide .slide-title {
+            font-size: 60px;
+            color: white;
+            -webkit-text-fill-color: white;
+            margin-bottom: 20px;
+        }
+
+        .cover-slide .slide-subtitle {
+            font-size: 28px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .cover-slide .author {
+            font-size: 22px;
+            margin-top: 40px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Code blocks */
+        pre {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            color: #e83e8c;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Icons */
+        .icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        /* Grid layout */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        /* Checkmark */
+        .check {
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* Highlight */
+        .highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .highlight h3 {
+            color: white;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+            }
+            .slide {
+                box-shadow: none;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: COPERTINA -->
+<div class="slide cover-slide">
+    <div>
+        <h1 class="slide-title">TaskFlow</h1>
+        <p class="slide-subtitle">Task & Project Manager</p>
+        <div style="margin: 60px 0; font-size: 24px;">
+            <p>Tesina Tecnologie Web</p>
+            <p>UNIMORE - 2026</p>
+        </div>
+        <p class="author">Colince Tcheussieu Mendji</p>
+    </div>
+</div>
+
+<!-- SLIDE 2: INTRODUZIONE -->
+<div class="slide">
+    <div class="slide-header">
+        <h1 class="slide-title">Cos'è TaskFlow?</h1>
+    </div>
+    <div class="slide-content">
+        <div class="highlight">
+            <h3>Applicazione web per la gestione di progetti e task</h3>
+        </div>
+
+        <div class="grid">
+            <div class="box">
+                <h4>✅ Obiettivi</h4>
+                <ul style="margin-left: 0; list-style: none;">
+                    <li>• Organizzare progetti in modo efficiente</li>
+                    <li>• Tracciare lo stato dei task</li>
+                    <li>• Visualizzare i progressi</li>
+                    <li>• Interfaccia semplice e intuitiva</li>
+                </ul>
+            </div>
+            <div class="box">
+                <h4>🎯 Target</h4>
+                <ul style="margin-left: 0; list-style: none;">
+                    <li>• Studenti e professionisti</li>
+                    <li>• Team di lavoro</li>
+                    <li>• Gestione personale</li>
+                    <li>• Organizzazione progetti</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>TaskFlow - Tesina Tecnologie Web</span>
+        <span>Slide 2</span>
+    </div>
+</div>
+
+<!-- SLIDE 3: TECNOLOGIE -->
+<div class="slide">
+    <div class="slide-header">
+        <h1 class="slide-title">Stack Tecnologico</h1>
+    </div>
+    <div class="slide-content">
+        <div class="grid">
+            <div>
+                <h3>Backend</h3>
+                <ul>
+                    <li><strong>🐍 Python 3</strong> - Linguaggio di programmazione</li>
+                    <li><strong>🌶️ Flask</strong> - Framework web minimalista</li>
+                    <li><strong>📊 CSV</strong> - Storage dati semplice e portabile</li>
+                </ul>
+
+                <h3 style="margin-top: 30px;">API</h3>
+                <ul>
+                    <li><strong>🔌 REST API</strong> - Endpoints JSON per accesso dati</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Frontend</h3>
+                <ul>
+                    <li><strong>📝 HTML5</strong> - Struttura delle pagine</li>
+                    <li><strong>🎨 CSS3</strong> - Styling e responsive design</li>
+                    <li><strong>🔧 Jinja2</strong> - Template engine di Flask</li>
+                    <li><strong>⚛️ React</strong> - Dashboard interattiva</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>TaskFlow - Tesina Tecnologie Web</span>
+        <span>Slide 3</span>
+    </div>
+</div>
+
+<!-- SLIDE 4: ARCHITETTURA -->
+<div class="slide">
+    <div class="slide-header">
+        <h1 class="slide-title">Struttura dell'Applicazione</h1>
+    </div>
+    <div class="slide-content">
+        <pre style="font-size: 16px;">
+TaskFlow/
+├── app.py                      # Backend Flask (270 righe)
+├── requirements.txt            # Dipendenze Python
+├── static/
+│   ├── data/                  # Database CSV
+│   │   ├── projects.csv       # Progetti
+│   │   └── tasks.csv          # Task
+│   └── css/
+│       └── style.css          # Stili (700+ righe)
+└── templates/                 # Template Jinja2
+    ├── base.html              # Template base
+    ├── index.html             # Homepage
+    ├── project_detail.html    # Dettaglio progetto
+    ├── create_project.html    # Form nuovo progetto
+    ├── create_task.html       # Form nuovo task
+    └── dashboard.html         # Dashboard React
+        </pre>
+        <p style="text-align: center; font-size: 20px; margin-top: 20px;">
+            <strong>Pattern Architetturale:</strong> MVC (Model-View-Controller)
+        </p>
+    </div>
+    <div class="slide-footer">
+        <span>TaskFlow - Tesina Tecnologie Web</span>
+        <span>Slide 4</span>
+    </div>
+</div>
+
+<!-- SLIDE 5: LE 5 PAGINE -->
+<div class="slide">
+    <div class="slide-header">
+        <h1 class="slide-title">Le 5 Pagine dell'Applicazione</h1>
+    </div>
+    <div class="slide-content">
+        <div class="grid">
+            <div class="box">
+                <h4>1. Homepage (/)</h4>
+                <p>Lista di tutti i progetti con statistiche, progress bar e bottone "Nuovo Progetto"</p>
+            </div>
+            <div class="box">
+                <h4>2. Dettaglio Progetto</h4>
+                <p>Visualizza tutti i task del progetto con badge status/priorità e azioni rapide</p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="box">
+                <h4>3. Nuovo Progetto</h4>
+                <p>Form con nome, descrizione e selezione colore personalizzato</p>
+            </div>
+            <div class="box">
+                <h4>4. Nuovo Task</h4>
+                <p>Form completo con status, priorità e descrizione del task</p>
+            </div>
+        </div>
+        <div class="box" style="margin-top: 20px;">
+            <h4>5. Dashboard React</h4>
+            <p>Statistiche generali e Kanban board interattiva con dati caricati via API REST</p>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>TaskFlow - Tesina Tecnologie Web</span>
+        <span>Slide 5</span>
+    </div>
+</div>
+
+<!-- SLIDE 6: CRUD -->
+<div class="slide">
+    <div class="slide-header">
+        <h1 class="slide-title">Funzionalità CRUD Complete</h1>
+    </div>
+    <div class="slide-content">
+        <div class="grid">
+            <div>
+                <h3>PROGETTI</h3>
+                <ul>
+                    <li><span class="check">✅</span><strong>CREATE</strong> - Form di creazione con validazione</li>
+                    <li><span class="check">✅</span><strong>READ</strong> - Lista progetti e dettaglio singolo</li>
+                    <li><span class="check">✅</span><strong>UPDATE</strong> - Modifica status task associati</li>
+                    <li><span class="check">✅</span><strong>DELETE</strong> - Eliminazione progetto e task collegati</li>
+                </ul>
+            </div>
+            <div>
+                <h3>TASK</h3>
+                <ul>
+                    <li><span class="check">✅</span><strong>CREATE</strong> - Form con tutti i campi</li>
+                    <li><span class="check">✅</span><strong>READ</strong> - Visualizzazione lista task</li>
+                    <li><span class="check">✅</span><strong>UPDATE</strong> - Cambio status (Da Fare → In Corso → Completato)</li>
+                    <li><span class="check">✅</span><strong>DELETE</strong> - Eliminazione task</li>
+                </ul>
+            </div>
+        </div>
+        <div class="highlight" style="margin-top: 40px;">
+            <p style="font-size: 22px;">Storage: Dati salvati in file CSV persistenti</p>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>TaskFlow - Tesina Tecnologie Web</span>
+        <span>Slide 6</span>
+    </div>
+</div>
+
+<!-- SLIDE 7: API REST -->
+<div class="slide">
+    <div class="slide-header">
+        <h1 class="slide-title">API REST in Formato JSON</h1>
+    </div>
+    <div class="slide-content">
+        <h2>3 Endpoint Disponibili</h2>
+
+        <div class="box" style="margin: 20px 0;">
+            <h4>1. GET /api/projects</h4>
+            <p>Restituisce tutti i progetti in formato JSON</p>
+        </div>
+
+        <div class="box" style="margin: 20px 0;">
+            <h4>2. GET /api/tasks</h4>
+            <p>Restituisce tutti i task in formato JSON</p>
+        </div>
+
+        <div class="box" style="margin: 20px 0;">
+            <h4>3. GET /api/projects/&lt;id&gt;/tasks</h4>
+            <p>Restituisce i task di un progetto specifico in formato JSON filtrato</p>
+        </div>
+
+        <div class="highlight" style="margin-top: 30px;">
+            <p style="font-size: 20px;">La Dashboard React consuma queste API per visualizzare i dati in tempo reale</p>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>TaskFlow - Tesina Tecnologie Web</span>
+        <span>Slide 7</span>
+    </div>
+</div>
+
+<!-- SLIDE 8: DASHBOARD REACT -->
+<div class="slide">
+    <div class="slide-header">
+        <h1 class="slide-title">Dashboard Interattiva con React</h1>
+    </div>
+    <div class="slide-content">
+        <div class="grid">
+            <div class="box">
+                <h4>📊 Statistiche Generali</h4>
+                <ul style="margin-left: 0; list-style: none;">
+                    <li>• Progetti totali</li>
+                    <li>• Task totali</li>
+                    <li>• Task completati</li>
+                    <li>• Percentuale completamento</li>
+                </ul>
+            </div>
+            <div class="box">
+                <h4>📋 Kanban Board</h4>
+                <ul style="margin-left: 0; list-style: none;">
+                    <li>• 3 colonne: Da Fare, In Corso, Completati</li>
+                    <li>• Card colorate per progetto</li>
+                    <li>• Badge priorità visibili</li>
+                    <li>• Aggiornamento real-time</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="highlight" style="margin-top: 40px;">
+            <h3>Tecnologia: React 18 con Hooks</h3>
+            <p style="font-size: 18px; margin-top: 10px;">useState e useEffect per gestione stato e side effects</p>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>TaskFlow - Tesina Tecnologie Web</span>
+        <span>Slide 8</span>
+    </div>
+</div>
+
+<!-- SLIDE 9: DESIGN -->
+<div class="slide">
+    <div class="slide-header">
+        <h1 class="slide-title">Design Moderno e Responsive</h1>
+    </div>
+    <div class="slide-content">
+        <h3>Caratteristiche del Design</h3>
+        <div class="grid">
+            <div>
+                <ul>
+                    <li>🎨 <strong>Colori personalizzabili</strong> per progetti</li>
+                    <li>📱 <strong>Responsive Design</strong> - Mobile, tablet, desktop</li>
+                    <li>⚡ <strong>Animazioni fluide</strong> e transizioni</li>
+                    <li>🎯 <strong>UI intuitiva</strong> - Facile da usare</li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li>🏷️ <strong>Badge visivi</strong> per status e priorità</li>
+                    <li>📊 <strong>Progress bar</strong> per completamento</li>
+                    <li>🎨 <strong>Hover effects</strong> per feedback</li>
+                    <li>✨ <strong>Gradient moderni</strong> e ombre</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="highlight" style="margin-top: 40px;">
+            <h3>700+ righe di CSS</h3>
+            <p>Variabili CSS • Grid Layout • Media Queries • Mobile-First</p>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>TaskFlow - Tesina Tecnologie Web</span>
+        <span>Slide 9</span>
+    </div>
+</div>
+
+<!-- SLIDE 10: STORAGE DATI -->
+<div class="slide">
+    <div class="slide-header">
+        <h1 class="slide-title">Gestione Dati con CSV</h1>
+    </div>
+    <div class="slide-content">
+        <h3>Format projects.csv</h3>
+        <pre>id,name,description,color,created_at
+1,Sito Web,Descrizione progetto,#3b82f6,2024-01-15T10:00:00</pre>
+
+        <h3>Format tasks.csv</h3>
+        <pre>id,project_id,title,description,status,priority,created_at
+1,1,Task 1,Descrizione task,todo,high,2024-01-16T10:00:00</pre>
+
+        <h3>Vantaggi</h3>
+        <div class="grid">
+            <ul>
+                <li><span class="check">✅</span> Nessun database esterno necessario</li>
+                <li><span class="check">✅</span> Dati human-readable</li>
+            </ul>
+            <ul>
+                <li><span class="check">✅</span> Facile backup e modifica</li>
+                <li><span class="check">✅</span> Portabilità massima</li>
+            </ul>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>TaskFlow - Tesina Tecnologie Web</span>
+        <span>Slide 10</span>
+    </div>
+</div>
+
+<!-- SLIDE 11: REQUISITI -->
+<div class="slide">
+    <div class="slide-header">
+        <h1 class="slide-title">Requisiti Tesina Soddisfatti</h1>
+    </div>
+    <div class="slide-content">
+        <table>
+            <thead>
+                <tr>
+                    <th>Requisito</th>
+                    <th>Status</th>
+                    <th>Implementazione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Almeno 4 pagine</strong></td>
+                    <td><span class="check">✅</span></td>
+                    <td>5 pagine HTML complete</td>
+                </tr>
+                <tr>
+                    <td><strong>Template</strong></td>
+                    <td><span class="check">✅</span></td>
+                    <td>Jinja2 con ereditarietà</td>
+                </tr>
+                <tr>
+                    <td><strong>CSS</strong></td>
+                    <td><span class="check">✅</span></td>
+                    <td>700+ righe responsive</td>
+                </tr>
+                <tr>
+                    <td><strong>JavaScript</strong></td>
+                    <td><span class="check">✅</span></td>
+                    <td>React Dashboard interattiva</td>
+                </tr>
+                <tr>
+                    <td><strong>API</strong></td>
+                    <td><span class="check">✅</span></td>
+                    <td>3 endpoint REST JSON</td>
+                </tr>
+                <tr>
+                    <td><strong>CRUD</strong></td>
+                    <td><span class="check">✅</span></td>
+                    <td>Completo per progetti e task</td>
+                </tr>
+                <tr>
+                    <td><strong>Codice funzionante</strong></td>
+                    <td><span class="check">✅</span></td>
+                    <td>Testato e operativo</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="slide-footer">
+        <span>TaskFlow - Tesina Tecnologie Web</span>
+        <span>Slide 11</span>
+    </div>
+</div>
+
+<!-- SLIDE 12: CODICE BACKEND -->
+<div class="slide">
+    <div class="slide-header">
+        <h1 class="slide-title">Snippet di Codice - Backend Flask</h1>
+    </div>
+    <div class="slide-content">
+        <h3>Esempio: Route per creare un progetto</h3>
+        <pre style="font-size: 13px;">@app.route('/create-project', methods=['POST'])
+def create_project():
+    name = request.form.get('name')
+    description = request.form.get('description', '')
+    color = request.form.get('color', '#3b82f6')
+
+    # Genera nuovo ID
+    projects = get_projects()
+    new_id = str(max([int(p['id']) for p in projects]) + 1)
+
+    # Salva nel CSV
+    csv_path = os.path.join('static', 'data', 'projects.csv')
+    with open(csv_path, 'a', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        writer.writerow([new_id, name, description, color,
+                        datetime.now().isoformat()])
+
+    return redirect(url_for('index'))</pre>
+    </div>
+    <div class="slide-footer">
+        <span>TaskFlow - Tesina Tecnologie Web</span>
+        <span>Slide 12</span>
+    </div>
+</div>
+
+<!-- SLIDE 13: CODICE REACT -->
+<div class="slide">
+    <div class="slide-header">
+        <h1 class="slide-title">Snippet di Codice - Frontend React</h1>
+    </div>
+    <div class="slide-content">
+        <h3>Esempio: Componente Kanban con React</h3>
+        <pre style="font-size: 13px;">function KanbanBoard() {
+    const [tasks, setTasks] = useState([]);
+
+    useEffect(() => {
+        fetch('/api/tasks')
+            .then(res => res.json())
+            .then(data => setTasks(data));
+    }, []);
+
+    const todoTasks = tasks.filter(t => t.status === 'todo');
+    const inProgressTasks = tasks.filter(t => t.status === 'in_progress');
+    const doneTasks = tasks.filter(t => t.status === 'done');
+
+    return (
+        &lt;div className="kanban-board"&gt;
+            &lt;KanbanColumn title="Da Fare" tasks={todoTasks} /&gt;
+            &lt;KanbanColumn title="In Corso" tasks={inProgressTasks} /&gt;
+            &lt;KanbanColumn title="Completati" tasks={doneTasks} /&gt;
+        &lt;/div&gt;
+    );
+}</pre>
+    </div>
+    <div class="slide-footer">
+        <span>TaskFlow - Tesina Tecnologie Web</span>
+        <span>Slide 13</span>
+    </div>
+</div>
+
+<!-- SLIDE 14: CONCLUSIONI -->
+<div class="slide">
+    <div class="slide-header">
+        <h1 class="slide-title">Competenze Acquisite</h1>
+    </div>
+    <div class="slide-content">
+        <h3>Cosa Ho Imparato</h3>
+        <div class="grid">
+            <ul>
+                <li><span class="check">✅</span> Sviluppo web full-stack</li>
+                <li><span class="check">✅</span> Design di API REST</li>
+                <li><span class="check">✅</span> Template engine Jinja2</li>
+                <li><span class="check">✅</span> CSS avanzato e responsive</li>
+            </ul>
+            <ul>
+                <li><span class="check">✅</span> Gestione stato con React Hooks</li>
+                <li><span class="check">✅</span> Architettura MVC</li>
+                <li><span class="check">✅</span> Storage dati con CSV</li>
+                <li><span class="check">✅</span> Best practices web development</li>
+            </ul>
+        </div>
+
+        <div class="highlight" style="margin-top: 40px;">
+            <h3>Risultato</h3>
+            <p style="font-size: 20px;">Un'applicazione web completa, funzionante e pronta all'uso che dimostra padronanza delle tecnologie web moderne</p>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>TaskFlow - Tesina Tecnologie Web</span>
+        <span>Slide 14</span>
+    </div>
+</div>
+
+<!-- SLIDE 15: RINGRAZIAMENTI -->
+<div class="slide cover-slide">
+    <div style="text-align: center;">
+        <h1 class="slide-title">Grazie per l'Attenzione!</h1>
+        <div style="margin: 60px 0; font-size: 22px; line-height: 2;">
+            <p><strong>TaskFlow - Task & Project Manager</strong></p>
+            <p>Tesina Tecnologie Web</p>
+            <p>UNIMORE - 2026</p>
+        </div>
+        <p class="author">Colince Tcheussieu Mendji</p>
+        <div style="margin-top: 60px; font-size: 20px;">
+            <p>Demo Live: http://127.0.0.1:5000</p>
+            <p style="margin-top: 30px; font-size: 28px;">Domande?</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

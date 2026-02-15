@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Nuovo Task - TaskFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <a href="{{ url_for('project_detail', project_id=project.id) }}" class="breadcrumb">← Torna al progetto</a>
+        <h1>Nuovo Task</h1>
+        <p>Progetto: <strong>{{ project.name }}</strong></p>
+    </div>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('create_task', project_id=project.id) }}" class="task-form">
+        <div class="form-group">
+            <label for="title">Titolo Task *</label>
+            <input type="text" id="title" name="title" required
+                   placeholder="Es: Implementare homepage"
+                   class="form-input">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Descrizione</label>
+            <textarea id="description" name="description"
+                      rows="4"
+                      placeholder="Descrizione dettagliata del task..."
+                      class="form-input"></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select id="status" name="status" class="form-input">
+                    <option value="todo" selected>Da Fare</option>
+                    <option value="in_progress">In Corso</option>
+                    <option value="done">Completato</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="priority">Priorità</label>
+                <select id="priority" name="priority" class="form-input">
+                    <option value="low">Bassa</option>
+                    <option value="medium" selected>Media</option>
+                    <option value="high">Alta</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <a href="{{ url_for('project_detail', project_id=project.id) }}" class="btn btn-secondary">Annulla</a>
+            <button type="submit" class="btn btn-primary">Crea Task</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

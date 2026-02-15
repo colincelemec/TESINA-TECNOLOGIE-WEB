@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Nuovo Progetto - TaskFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <a href="{{ url_for('index') }}" class="breadcrumb">← Torna ai progetti</a>
+        <h1>Nuovo Progetto</h1>
+        <p>Crea un nuovo progetto per organizzare i tuoi task</p>
+    </div>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('create_project') }}" class="project-form">
+        <div class="form-group">
+            <label for="name">Nome Progetto *</label>
+            <input type="text" id="name" name="name" required
+                   placeholder="Es: Sito Web Aziendale"
+                   class="form-input">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Descrizione</label>
+            <textarea id="description" name="description"
+                      rows="4"
+                      placeholder="Descrizione del progetto..."
+                      class="form-input"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Colore Progetto</label>
+            <div class="color-picker">
+                <input type="radio" name="color" value="#3b82f6" id="color1" checked>
+                <label for="color1" class="color-option" style="background-color: #3b82f6"></label>
+
+                <input type="radio" name="color" value="#10b981" id="color2">
+                <label for="color2" class="color-option" style="background-color: #10b981"></label>
+
+                <input type="radio" name="color" value="#8b5cf6" id="color3">
+                <label for="color3" class="color-option" style="background-color: #8b5cf6"></label>
+
+                <input type="radio" name="color" value="#f59e0b" id="color4">
+                <label for="color4" class="color-option" style="background-color: #f59e0b"></label>
+
+                <input type="radio" name="color" value="#ef4444" id="color5">
+                <label for="color5" class="color-option" style="background-color: #ef4444"></label>
+
+                <input type="radio" name="color" value="#ec4899" id="color6">
+                <label for="color6" class="color-option" style="background-color: #ec4899"></label>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Annulla</a>
+            <button type="submit" class="btn btn-primary">Crea Progetto</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TaskFlow{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="{{ url_for('index') }}" class="navbar-brand">
+                <h1>TaskFlow</h1>
+                <p>Task & Project Manager</p>
+            </a>
+            <div class="navbar-menu">
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('create_project_form') }}" class="nav-link">Nuovo Progetto</a>
+                <a href="{{ url_for('dashboard') }}" class="nav-link">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenuto principale -->
+    <main class="main-content">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 TaskFlow - Progetto Tecnologie Web UNIMORE</p>
+            <p>Colince Tcheussieu Mendji</p>
+        </div>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

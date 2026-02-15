@@ -1,0 +1,8 @@
+id,project_id,title,description,status,priority,created_at
+1,1,Design Homepage,Creare il design della homepage,done,high,2024-01-16T10:00:00
+2,1,Implementare Menu,Sviluppare il menu di navigazione,in_progress,high,2024-01-17T11:00:00
+3,1,Pagina Contatti,Creare form contatti,in_progress,medium,2024-01-18T14:00:00
+4,2,Setup Progetto,Configurare ambiente di sviluppo,done,high,2024-01-21T09:00:00
+5,2,UI Design,Design interfaccia utente,in_progress,medium,2024-01-22T10:00:00
+6,3,Analisi Requisiti,Raccogliere requisiti del sistema,done,high,2024-02-02T09:00:00
+7,3,Database Design,Progettare schema database,todo,high,2024-02-03T10:00:00

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Home - TaskFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>I Miei Progetti</h1>
+        <p>Gestisci tutti i tuoi progetti in un unico posto</p>
+    </div>
+    <a href="{{ url_for('create_project_form') }}" class="btn btn-primary">+ Nuovo Progetto</a>
+</div>
+
+{% if projects %}
+<div class="projects-grid">
+    {% for project in projects %}
+    <div class="project-card" style="border-left: 4px solid {{ project.color }}">
+        <div class="card-header">
+            <h2>{{ project.name }}</h2>
+            <div class="card-actions">
+                <a href="{{ url_for('project_detail', project_id=project.id) }}"
+                   class="btn btn-small" title="Visualizza">
+                    👁️ Visualizza
+                </a>
+                <a href="{{ url_for('delete_project', project_id=project.id) }}"
+                   class="btn btn-small btn-danger"
+                   onclick="return confirm('Sei sicuro di voler eliminare questo progetto?')"
+                   title="Elimina">
+                    🗑️
+                </a>
+            </div>
+        </div>
+
+        <p class="project-description">{{ project.description }}</p>
+
+        <div class="project-stats">
+            <div class="stat">
+                <span class="stat-label">Task Totali</span>
+                <span class="stat-value">{{ project.task_count }}</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Completati</span>
+                <span class="stat-value">{{ project.tasks_completed }}</span>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            {% if project.task_count > 0 %}
+                {% set progress = (project.tasks_completed / project.task_count * 100)|int %}
+            {% else %}
+                {% set progress = 0 %}
+            {% endif %}
+            <div class="progress-fill" style="width: {{ progress }}%; background-color: {{ project.color }}"></div>
+        </div>
+        <p class="progress-text">{{ progress }}% completato</p>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+    <h2>Nessun Progetto</h2>
+    <p>Non hai ancora creato nessun progetto. Inizia creandone uno!</p>
+    <a href="{{ url_for('create_project_form') }}" class="btn btn-primary">Crea il tuo primo progetto</a>
+</div>
+{% endif %}
+{% endblock %}

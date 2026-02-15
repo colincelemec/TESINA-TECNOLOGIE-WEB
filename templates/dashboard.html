@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - TaskFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Dashboard Interattiva</h1>
+        <p>Visualizza e gestisci i tuoi task in una vista Kanban</p>
+    </div>
+</div>
+
+<div id="root"></div>
+
+{% endblock %}
+
+{% block scripts %}
+<!-- Carica React e Babel per JSX -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+{% raw %}
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+function KanbanBoard() {
+    const [tasks, setTasks] = useState([]);
+    const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    // Carica i dati quando il componente è montato
+    useEffect(() => {
+        loadData();
+    }, []);
+
+    const loadData = async () => {
+        try {
+            const [tasksRes, projectsRes] = await Promise.all([
+                fetch('/api/tasks'),
+                fetch('/api/projects')
+            ]);
+
+            const tasksData = await tasksRes.json();
+            const projectsData = await projectsRes.json();
+
+            setTasks(tasksData);
+            setProjects(projectsData);
+            setLoading(false);
+        } catch (error) {
+            console.error('Errore nel caricamento dei dati:', error);
+            setLoading(false);
+        }
+    };
+
+    // Filtra i task per status
+    const todoTasks = tasks.filter(t => t.status === 'todo');
+    const inProgressTasks = tasks.filter(t => t.status === 'in_progress');
+    const doneTasks = tasks.filter(t => t.status === 'done');
+
+    // Trova il progetto associato a un task
+    const getProjectName = (projectId) => {
+        const project = projects.find(p => p.id === projectId);
+        return project ? project.name : 'N/A';
+    };
+
+    const getProjectColor = (projectId) => {
+        const project = projects.find(p => p.id === projectId);
+        return project ? project.color : '#3b82f6';
+    };
+
+    // Componente per una singola card task
+    const TaskCard = ({ task }) => {
+        const priorityColors = {
+            low: '#10b981',
+            medium: '#f59e0b',
+            high: '#ef4444'
+        };
+
+        return (
+            <div className="kanban-card">
+                <h3>{task.title}</h3>
+                {task.description && <p className="card-description">{task.description}</p>}
+                <div className="card-footer">
+                    <span
+                        className="project-badge"
+                        style={{
+                            backgroundColor: getProjectColor(task.project_id) + '20',
+                            color: getProjectColor(task.project_id)
+                        }}
+                    >
+                        {getProjectName(task.project_id)}
+                    </span>
+                    <span
+                        className="priority-badge"
+                        style={{ backgroundColor: priorityColors[task.priority] }}
+                    >
+                        {task.priority === 'low' ? 'Bassa' : task.priority === 'medium' ? 'Media' : 'Alta'}
+                    </span>
+                </div>
+            </div>
+        );
+    };
+
+    // Componente per una colonna Kanban
+    const KanbanColumn = ({ title, tasks, color }) => {
+        return (
+            <div className="kanban-column">
+                <div className="column-header" style={{ backgroundColor: color }}>
+                    <h2>{title}</h2>
+                    <span className="task-count">{tasks.length}</span>
+                </div>
+                <div className="column-content">
+                    {tasks.length > 0 ? (
+                        tasks.map(task => <TaskCard key={task.id} task={task} />)
+                    ) : (
+                        <div className="empty-column">Nessun task</div>
+                    )}
+                </div>
+            </div>
+        );
+    };
+
+    if (loading) {
+        return (
+            <div className="loading">
+                <p>Caricamento dati...</p>
+            </div>
+        );
+    }
+
+    return (
+        <div className="dashboard-content">
+            {/* Statistiche generali */}
+            <div className="stats-grid">
+                <div className="stat-card">
+                    <div className="stat-icon" style={{ backgroundColor: '#3b82f620' }}>📁</div>
+                    <div>
+                        <p className="stat-label">Progetti Totali</p>
+                        <p className="stat-value">{projects.length}</p>
+                    </div>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-icon" style={{ backgroundColor: '#f59e0b20' }}>📋</div>
+                    <div>
+                        <p className="stat-label">Task Totali</p>
+                        <p className="stat-value">{tasks.length}</p>
+                    </div>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-icon" style={{ backgroundColor: '#10b98120' }}>✓</div>
+                    <div>
+                        <p className="stat-label">Task Completati</p>
+                        <p className="stat-value">{doneTasks.length}</p>
+                    </div>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-icon" style={{ backgroundColor: '#8b5cf620' }}>📊</div>
+                    <div>
+                        <p className="stat-label">Completamento</p>
+                        <p className="stat-value">
+                            {tasks.length > 0 ? Math.round((doneTasks.length / tasks.length) * 100) : 0}%
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Board Kanban */}
+            <div className="kanban-board">
+                <KanbanColumn
+                    title="Da Fare"
+                    tasks={todoTasks}
+                    color="#f59e0b"
+                />
+                <KanbanColumn
+                    title="In Corso"
+                    tasks={inProgressTasks}
+                    color="#3b82f6"
+                />
+                <KanbanColumn
+                    title="Completati"
+                    tasks={doneTasks}
+                    color="#10b981"
+                />
+            </div>
+        </div>
+    );
+}
+
+// Render dell'applicazione
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<KanbanBoard />);
+</script>
+{% endraw %}
+{% endblock %}
